@@ -50,23 +50,27 @@ class Field {
     return false;
   }
 
-  move() {
-    let move = prompt('Which way? ');
+  askQuestion() {
 
-    if(move === 'w') {
-      this._playerX -= 1;
-    }
+    let answer = prompt('Which way? ').toUpperCase();
 
-    if(move === 's') {
-      this._playerX += 1;
-    }
-
-    if(move === 'd') {
-      this._playerY += 1;
-    }
-
-    if(move === 'a') {
-      this._playerY -= 1;
+    switch (answer) {
+      case 'W':
+        this._playerX -= 1;
+        break;
+      case 'S':
+        this._playerX += 1;
+        break;
+      case 'D':
+        this._playerY += 1;
+        break;
+      case 'A':
+        this._playerY -= 1;
+        break;
+      default:
+        console.log('Enter W, S, A or D.');
+        this.askQuestion();
+        break;
     }
   }
 
@@ -133,7 +137,7 @@ class Field {
     let result = false;
     while(result === false) {
       this.print();
-      this.move();
+      this.askQuestion();
       result = this.result();
     }
     console.log(result);
